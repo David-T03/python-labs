@@ -11,7 +11,9 @@ Un repositorio práctico donde se documenta y aprende lo básico de Python paso 
 3. [`02_operadores.py` - Operadores en Python](#02_operadorespy---operadores-en-python)
 4. [`03_strings.py` - Cadenas de Texto (Strings)](#03_stringspy---cadenas-de-texto-strings)
 5. [`04_list.py` - Listas (Lists)](#04_listpy---listas-lists)
-6. [📚 Material Adicional y Créditos](#-material-adicional-y-créditos)
+6. [`05_tuplas.py` - Tuplas (Tuples)](#05_tuplapy---tuplas-tuples)
+7. [`06_sets.py` - Conjuntos (Sets)](#06_setspy---conjuntos-sets)
+8. [📚 Material Adicional y Créditos](#-material-adicional-y-créditos)
 
 ---
 
@@ -233,6 +235,96 @@ Una lista es una colección **ordenada**, **mutable** (se puede modificar despu�
 | `.sort(reverse=False)` | Ordena la lista original (*in-place*) de forma ascendente o descendente. | `nums.sort()` |
 | `.reverse()` | Invierte el orden de los elementos de la lista original. | `nums.reverse()` |
 | `.copy()` | Devuelve una copia superficial (*shallow copy*) de la lista. | `copia = nums.copy()` |
+
+## `05_tuplas.py` - Tuplas (Tuples)
+
+Una **tupla** es una colección **ordenada** e **inmutable** de elementos que permite valores duplicados y de distintos tipos de datos (`int`, `float`, `str`, etc.). Se definen utilizando paréntesis `()` o el constructor `tuple()`.
+
+### ¿Cuándo y por qué usar una Tupla en lugar de una Lista?
+* **Seguridad e integridad de datos:** Al ser inmutables, garantizan que los datos no sean modificados accidentalmente en otra parte del programa (por ejemplo: coordenadas, fechas, configuraciones fijas o registros de base de datos).
+* **Rendimiento:** Ocupan menos espacio en memoria y son ligeramente más rápidas de recorrer que las listas.
+* **Uso como claves:** A diferencia de las listas, las tuplas pueden utilizarse como claves (*keys*) dentro de un diccionario si contienen elementos inmutables.
+
+### Conceptos y Operaciones Clave
+
+* **Definición y tipos:**
+  * Vacías: `my_tuple = tuple()` o `my_other_tuple = ()`.
+  * Con datos: `my_tuple = (35, 1.76, "Alonso", "Marín")`.
+  * **Tupla de un solo elemento:** Requiere una coma al final (`(35,)`), de lo contrario Python lo interpreta como un entero o cadena normal.
+  * **Empaquetado implícito:** Python permite crear tuplas sin paréntesis separando valores por comas: `datos = 35, 1.76, "Alonso"`.
+* **Inmutabilidad estricta:** Intentar reasignar un valor directamente (ej. `my_tuple[1] = 1.80`) arroja un `TypeError`. Si necesitas modificarla, primero debes convertirla a lista con `list()`, cambiar el dato y volverla a convertir con `tuple()`.
+* **Acceso y Slicing (rebanado):**
+  * Índices positivos desde `0` (`my_tuple[0]` -> `35`) y negativos desde `-1` (`my_tuple[-1]` -> `"Marín"`).
+  * Subtuplas mediante rangos: `my_sum_tuple[3:4]` extrae una nueva tupla con el elemento en el índice `3` (el límite superior es exclusivo; para ir hasta el final se usa `my_sum_tuple[3:]`).
+* **Concatenación y eliminación:**
+  * Se pueden sumar dos tuplas para generar una nueva sin alterar las originales: `my_sum_tuple = my_tuple + my_other_tuple`.
+  * Al no poder borrar elementos individuales, `del my_sum_tuple` elimina por completo la variable de la memoria.
+* **Desempaquetado (Unpacking):** Permite asignar cada elemento de la tupla a variables individuales en una sola línea:
+  ```python
+  edad, estatura, nombre, apellido = my_tuple
+
+  ### Métodos propios de las Tuplas
+
+Debido a su inmutabilidad, las tuplas únicamente poseen **dos métodos nativos**:
+
+| Método | Descripción | Ejemplo |
+| :--- | :--- | :--- |
+| `.count(x)` | Devuelve cuántas veces aparece el elemento `x` dentro de la tupla. | `my_tuple.count("Alonso")` -> `1` |
+| `.index(x)` | Devuelve el índice de la primera aparición de `x` (lanza `ValueError` si no existe). | `my_tuple.index("Marín")` -> `3` |
+
+### Funciones integradas (Built-in) compatibles con Tuplas
+
+Aunque no son métodos propios del objeto `tuple`, estas funciones de Python se utilizan constantemente para operar sobre ellas:
+
+| Función | Descripción | Ejemplo |
+| :--- | :--- | :--- |
+| `len(tupla)` | Devuelve la cantidad total de elementos en la tupla. | `len((10, 20, 30))` -> `3` |
+| `max(tupla)` | Devuelve el elemento de mayor valor (requiere elementos comparables entre sí). | `max((4, 9, 1))` -> `9` |
+| `min(tupla)` | Devuelve el elemento de menor valor. | `min((4, 9, 1))` -> `1` |
+| `sum(tupla)` | Suma todos los elementos numéricos de la tupla. | `sum((10, 20, 30))` -> `60` |
+| `sorted(tupla)` | Devuelve una **nueva lista** con los elementos ordenados (no modifica la tupla). | `sorted((3, 1, 2))` -> `[1, 2, 3]` |
+| `tuple(iterable)` | Convierte otro iterable (lista, string, set) en una tupla. | `tuple([1, 2, 3])` -> `(1, 2, 3)` |
+| `any(tupla)` | Devuelve `True` si al menos un elemento de la tupla es verdadero. | `any((0, False, 5))` -> `True` |
+| `all(tupla)` | Devuelve `True` si todos los elementos de la tupla son verdaderos. | `all((1, True, "a"))` -> `True` |
+| `enumerate(tupla)` | Devuelve un iterador de tuplas con índice y valor `(índice, elemento)`. | `list(enumerate(('a', 'b')))` -> `[(0, 'a'), (1, 'b')]` |
+
+---
+
+## `06_sets.py` - Conjuntos (Sets)
+
+Un **set** (conjunto) es una colección **no ordenada**, **no indexada**, **mutable** y que **no permite elementos duplicados**. Internamente utilizan tablas *hash*, lo que los hace extremadamente rápidos para verificar si un elemento existe dentro de ellos.
+
+### ¿Cuándo y por qué usar un Set?
+* **Eliminar duplicados automáticamente:** Si agregas un elemento repetido (como hacer `.add("Costa Rica")` dos veces), Python simplemente lo ignora. También es ideal para limpiar listas convirtiéndolas con `set(mi_lista)`.
+* **Búsquedas ultrarrápidas:** Comprobar pertenencia con el operador `in` (ej. `"Alonso" in my_set`) es mucho más eficiente en un `set` que en una `list` o `tuple`.
+* **Operaciones matemáticas de conjuntos:** Permiten calcular uniones, intersecciones y diferencias entre grupos de datos de forma nativa.
+
+### Conceptos y Reglas Clave
+
+* **Trampa al crear un set vacío (`{}` vs `set()`):**
+  * `my_set = set()` crea un **set vacío** (`<class 'set'>`).
+  * `my_other_set = {}` crea un **diccionario vacío** (`<class 'dict'>`), aunque al asignarle elementos sin clave-valor (`{25, 1.74, "David", "Ruiz"}`) Python sí lo reconoce como `set`.
+* **Sin orden ni índices:** Al no mantener un orden fijo, el resultado de `print(my_set)` puede variar en cada ejecución y **no soporta indexación ni slicing** (`my_set[0]` lanzará un `TypeError`).
+* **Elementos inmutables:** Un set puede modificarse (agregar o quitar elementos), pero los elementos guardados dentro de él deben ser inmutables (*hashables*), como números, strings o tuplas. No puede contener listas ni otros sets.
+* **Comprobación de existencia:** Se utiliza `elemento in my_set` o `elemento not in my_set` para obtener un booleano (`True` o `False`).
+
+### Métodos principales y Operaciones de Conjuntos
+
+| Método / Operador | Descripción | Ejemplo |
+| :--- | :--- | :--- |
+| `.add(x)` | Agrega un único elemento `x` al set. Si ya existe, no hace nada. | `my_set.add("Costa Rica")` |
+| `.update(iterable)` | Agrega múltiples elementos de una lista, tupla u otro set. | `my_set.update(["Python", "Git"])` |
+| `.remove(x)` | Elimina el elemento `x`. Lanza `KeyError` si el elemento no existe. | `my_set.remove("Alonso")` |
+| `.discard(x)` | Elimina el elemento `x` si existe; si no existe, **no** lanza error. | `my_set.discard("España")` |
+| `.pop()` | Elimina y devuelve un elemento arbitrario del set. | `item = my_set.pop()` |
+| `.clear()` | Elimina todos los elementos dejando el conjunto vacío (`set()`). | `my_set.clear()` |
+| `.union(otro)` o `\|` | Devuelve un nuevo set con todos los elementos únicos de ambos conjuntos. | `my_set.union(my_other_set)` |
+| `.difference(otro)` o `-` | Devuelve los elementos que están en el primer set pero **no** en el segundo. | `my_new_set.difference(my_set)` |
+| `.intersection(otro)` o `&` | Devuelve un nuevo set solo con los elementos en común entre ambos. | `my_new_set.intersection(my_set)` |
+| `.symmetric_difference(otro)` o `^` | Devuelve los elementos que están en uno u otro set, pero **no** en ambos. | `set_a.symmetric_difference(set_b)` |
+| `.issubset(otro)` o `<=` | Devuelve `True` si todos los elementos del set están contenidos en `otro`. | `set_a.issubset(set_b)` |
+| `.issuperset(otro)` o `>=` | Devuelve `True` si el set contiene todos los elementos de `otro`. | `set_b.issuperset(set_a)` |
+| `.isdisjoint(otro)` | Devuelve `True` si ambos sets no tienen ningún elemento en común. | `set_a.isdisjoint(set_b)` |
 
 ---
 
