@@ -1,7 +1,46 @@
-# python-labs
-Un repositorio en donde se aprenderá lo básico de Python
+# 🐍 python-labs
 
-# Funciones Integradas (Built-in) en Python - Cheat Sheet
+Un repositorio práctico donde se documenta y aprende lo básico de Python paso a paso, dividido por módulos temáticos.
+
+---
+
+## 📂 Índice de Contenido
+
+1. [`00_hello.py` - Introducción y Primeros Pasos](#00_hellopy---introducción-y-primeros-pasos)
+2. [`01_variables.py` - Variables y Funciones Integradas](#01_variablespy---variables-y-funciones-integradas)
+3. [`02_operadores.py` - Operadores en Python](#02_operadorespy---operadores-en-python)
+4. [`03_strings.py` - Cadenas de Texto (Strings)](#03_stringspy---cadenas-de-texto-strings)
+5. [`04_list.py` - Listas (Lists)](#04_listpy---listas-lists)
+6. [📚 Material Adicional y Créditos](#-material-adicional-y-créditos)
+
+---
+
+## `00_hello.py` - Introducción y Primeros Pasos
+
+Primer acercamiento a la sintaxis de Python, salida por consola, comentarios y verificación de tipos de datos primitivos.
+
+* **Salida estándar:** Uso de `print()` para mostrar mensajes y resultados en consola.
+* **Comentarios:**
+  * `#` para comentarios de una sola línea.
+  * `""" """` o `''' '''` para comentarios multilínea o *docstrings*.
+* **Tipos de datos básicos:** `int` (enteros), `float` (decimales), `complex` (complejos), `str` (cadenas de texto), `bool` (booleanos) y colecciones iniciales (`list`, `tuple`, `set`, `dict`).
+* **Inspección de tipos:** Uso de `type()` para comprobar qué tipo de dato almacena un valor o variable.
+
+---
+
+## `01_variables.py` - Variables y Funciones Integradas
+
+### Convenciones para Nombres de Variables en Python
+
+En Python las variables son de tipado dinámico y no requieren declaración previa. Se recomienda seguir el estándar **PEP 8**:
+
+* Nombres de una sola palabra en minúsculas como `firstname`, `lastname`, `age`, `country` y `city`.
+* Nombres compuestos separados por guiones bajos (*snake_case*) como `first_name`, `last_name`, `capital_city` y `birth_year`.
+* Uso de números integrados o al final como `year2021`, `year_2021`, `current_year_2021`, `num1` y `num2`.
+* Uso de un guion bajo inicial (`_if`) para evitar conflictos si se desea utilizar una palabra reservada como variable.
+* **Reglas estrictas:** No pueden empezar con un número, ni contener espacios o caracteres especiales (`$`, `-`, `@`, etc.).
+
+### Funciones Integradas (Built-in) en Python - Cheat Sheet
 
 | Función | Descripción | Ejemplo Práctico |
 |---------|-------------|------------------|
@@ -75,16 +114,9 @@ Un repositorio en donde se aprenderá lo básico de Python
 | `zip()` | Itera sobre varios iterables agrupando sus elementos en paralelo. | `list(zip([1, 2], ['a', 'b']))` devuelve `[(1, 'a'), (2, 'b')]` |
 | `__import__()` | Función interna invocada por la instrucción `import`. | `__import__('math')` |
 
-## Convenciones para Nombres de Variables en Python
+---
 
-A continuación se muestran ejemplos válidos de nombres de variables:
-
-* Nombres de una sola palabra en minúsculas como `firstname`, `lastname`, `age`, `country` y `city`.
-* Nombres compuestos separados por guiones bajos (*snake_case*) como `first_name`, `last_name`, `capital_city` y `birth_year`.
-* Uso de números integrados o al final como `year2021`, `year_2021`, `current_year_2021`, `num1` y `num2`.
-* Uso de un guion bajo inicial (`_if`) para evitar conflictos si se desea utilizar una palabra reservada como variable.
-
-## Operadores en Python
+## `02_operadores.py` - Operadores en Python
 
 ### Operadores Aritméticos
 
@@ -99,8 +131,6 @@ Se utilizan con valores numéricos para realizar operaciones matemáticas comune
 | `%` | Módulo | Devuelve el residuo o sobrante de una división (ej. `5 % 2` da `1`) |
 | `**` | Exponenciación | Eleva un número a la potencia de otro (ej. `2 ** 3` da `8`) |
 | `//` | División entera | Divide y redondea el resultado hacia abajo al número entero más cercano (ej. `5 // 2` da `2`) |
-
----
 
 ### Operadores de Asignación
 
@@ -117,7 +147,7 @@ Se utilizan para asignar valores a las variables combinándolos con operaciones 
 | `//=` | `x //= 3` | `x = x // 3` |
 | `**=` | `x **= 3` | `x = x ** 3` |
 | `&=` | `x &= 3` | `x = x & 3` |
-| `|=` | `x \|= 3` | `x = x \| 3` |
+| `\|=` | `x \|= 3` | `x = x \| 3` |
 | `^=` | `x ^= 3` | `x = x ^ 3` |
 | `>>=` | `x >>= 3` | `x = x >> 3` |
 | `<<=` | `x <<= 3` | `x = x << 3` |
@@ -135,8 +165,6 @@ Se utilizan para comparar dos valores y devuelven un valor booleano (`True` o `F
 | `>=` | Mayor o igual que | `x >= y` |
 | `<=` | Menor o igual que | `x <= y` |
 
----
-
 ### Operadores Lógicos
 
 Se utilizan para combinar declaraciones condicionales.
@@ -146,3 +174,71 @@ Se utilizan para combinar declaraciones condicionales.
 | `and` | Devuelve `True` si ambas afirmaciones son verdaderas | `x < 5 and x < 10` |
 | `or` | Devuelve `True` si al menos una de las afirmaciones es verdadera | `x < 5 or x < 4` |
 | `not` | Invierte el resultado; devuelve `False` si el resultado es verdadero | `not(x < 5 and x < 10)` |
+
+---
+
+## `03_strings.py` - Cadenas de Texto (Strings)
+
+Los *strings* en Python son secuencias **inmutables** de caracteres delimitadas por comillas simples (`' '`), dobles (`" "`) o triples (`''' '''`).
+
+### Conceptos Clave
+* **Secuencias de escape:** `\n` (salto de línea), `\t` (tabulación), `\\` (barra invertida), `\'` (comilla simple), `\"` (comilla doble).
+* **Formateo de cadenas:**
+  * **f-strings (Recomendado):** `f"Hola, {nombre}. Tienes {edad} años."`
+  * **`.format()`:** `"Hola, {}. Tienes {} años.".format(nombre, edad)`
+  * **Operador `%` (clásico):** `"Hola, %s. Tienes %d años." % (nombre, edad)`
+* **Desempaquetado e Indexación:**
+  * Índices positivos desde `0` (izquierda a derecha) y negativos desde `-1` (derecha a izquierda).
+  * **Slicing (rebanado):** `texto[inicio:fin:paso]` (ej. `texto[::-1]` invierte la cadena).
+
+### Métodos más utilizados en Strings
+
+| Método | Descripción | Ejemplo |
+| :--- | :--- | :--- |
+| `.capitalize()` | Convierte el primer carácter en mayúscula. | `'python'.capitalize()` -> `'Python'` |
+| `.upper()` / `.lower()` | Convierte toda la cadena a mayúsculas o minúsculas. | `'Hola'.upper()` -> `'HOLA'` |
+| `.count(sub)` | Cuenta cuántas veces aparece una subcadena. | `'banana'.count('a')` -> `3` |
+| `.find(sub)` | Devuelve el índice de la primera aparición (`-1` si no existe). | `'python'.find('th')` -> `2` |
+| `.replace(old, new)` | Reemplaza una subcadena por otra. | `'hola mundo'.replace('mundo', 'Python')` |
+| `.split(sep)` | Divide la cadena en una lista usando un separador. | `'a,b,c'.split(',')` -> `['a', 'b', 'c']` |
+| `.strip()` | Elimina espacios en blanco (o caracteres) al inicio y al final. | `'  hola  '.strip()` -> `'hola'` |
+| `.startswith()` / `.endswith()` | Verifica si la cadena empieza o termina con un texto dado. | `'archivo.py'.endswith('.py')` -> `True` |
+| `.isnumeric()` / `.isalpha()` | Comprueba si todos los caracteres son numéricos o alfabéticos. | `'123'.isnumeric()` -> `True` |
+
+---
+
+## `04_list.py` - Listas (Lists)
+
+Una lista es una colección **ordenada**, **mutable** (se puede modificar después de crearse) y que **permite elementos duplicados** de distintos tipos de datos. Se definen usando corchetes `[]` o el constructor `list()`.
+
+### Operaciones Comunes
+* **Acceso y modificación:** `mi_lista[0] = "nuevo_valor"`
+* **Slicing:** `mi_lista[1:4]` extrae una sublista desde el índice 1 hasta el 3.
+* **Desempaquetado:** `primero, segundo, *resto = [1, 2, 3, 4, 5]`
+* **Verificación:** `'elemento' in mi_lista` devuelve `True` o `False`.
+* **Concatenación:** `lista_total = lista_1 + lista_2`
+
+### Métodos principales de Listas
+
+| Método | Descripción | Ejemplo |
+| :--- | :--- | :--- |
+| `.append(x)` | Agrega un elemento al final de la lista. | `nums.append(4)` |
+| `.insert(i, x)` | Inserta un elemento en una posición específica `i`. | `nums.insert(1, 'nuevo')` |
+| `.extend(iterable)` | Agrega todos los elementos de otro iterable al final. | `nums.extend([5, 6])` |
+| `.remove(x)` | Elimina la primera aparición del valor `x`. | `nums.remove('nuevo')` |
+| `.pop(i)` | Elimina y devuelve el elemento en el índice `i` (por defecto el último). | `ultimo = nums.pop()` |
+| `.clear()` | Vacía todos los elementos de la lista. | `nums.clear()` |
+| `.index(x)` | Devuelve el índice de la primera aparición de `x`. | `nums.index(4)` |
+| `.count(x)` | Cuenta cuántas veces aparece `x` en la lista. | `nums.count(2)` |
+| `.sort(reverse=False)` | Ordena la lista original (*in-place*) de forma ascendente o descendente. | `nums.sort()` |
+| `.reverse()` | Invierte el orden de los elementos de la lista original. | `nums.reverse()` |
+| `.copy()` | Devuelve una copia superficial (*shallow copy*) de la lista. | `copia = nums.copy()` |
+
+---
+
+## 📚 Material Adicional y Créditos
+
+Este repositorio de práctica está inspirado y estructurado tomando como base el excelente curso y guía paso a paso de **Asabeneh Yetayeh**:
+
+* **Repositorio de referencia completo:** [Asabeneh / 30-Days-Of-Python](https://github.com/Asabeneh/30-Days-Of-Python)
+  * *Descripción:* Un reto de programación de 30 días que cubre desde los fundamentos de Python hasta estructuras de datos, funciones, programación orientada a objetos, manejo de archivos, expresiones regulares, análisis de datos (`NumPy`, `Pandas`) y desarrollo web (`Flask`).
