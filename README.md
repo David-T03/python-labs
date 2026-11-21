@@ -13,7 +13,8 @@ Un repositorio práctico donde se documenta y aprende lo básico de Python paso 
 5. [`04_list.py` - Listas (Lists)](#04_listpy---listas-lists)
 6. [`05_tuplas.py` - Tuplas (Tuples)](#05_tuplapy---tuplas-tuples)
 7. [`06_sets.py` - Conjuntos (Sets)](#06_setspy---conjuntos-sets)
-8. [📚 Material Adicional y Créditos](#-material-adicional-y-créditos)
+8. [`07_dicts.py` - Diccionarios (Dictionaries)](#07_dictspy---diccionarios-dictionaries)
+9. [📚 Material Adicional y Créditos](#-material-adicional-y-créditos)
 
 ---
 
@@ -325,6 +326,52 @@ Un **set** (conjunto) es una colección **no ordenada**, **no indexada**, **muta
 | `.issubset(otro)` o `<=` | Devuelve `True` si todos los elementos del set están contenidos en `otro`. | `set_a.issubset(set_b)` |
 | `.issuperset(otro)` o `>=` | Devuelve `True` si el set contiene todos los elementos de `otro`. | `set_b.issuperset(set_a)` |
 | `.isdisjoint(otro)` | Devuelve `True` si ambos sets no tienen ningún elemento en común. | `set_a.isdisjoint(set_b)` |
+
+---
+
+---
+
+## `07_dicts.py` - Diccionarios (Dictionaries)
+
+Un **diccionario** (`dict`) es una colección **mutable**, **indexada por claves** y **ordenada** (a partir de Python 3.7 mantiene el orden de inserción) que almacena datos en pares **`clave: valor`** (*key-value*). No permite claves duplicadas, aunque los valores sí pueden repetirse y ser de cualquier tipo de dato (incluyendo listas, sets u otros diccionarios).
+
+### ¿Cuándo y por qué usar un Diccionario?
+* **Representar entidades estructuradas:** Son ideales para modelar objetos o registros con atributos nombrados (como un usuario, un producto o respuestas en formato JSON), haciendo el código mucho más legible que acceder por índices numéricos.
+* **Búsqueda directa por clave:** Al igual que los sets, usan tablas *hash* internamente, permitiendo acceder, modificar o verificar una clave de forma instantánea sin importar el tamaño del diccionario.
+
+### Conceptos y Operaciones Clave
+
+* **Creación:**
+  * Vacíos: `my_dict = dict()` o `my_other_dict = {}`.
+  * Con datos mixtos y anidados: Las claves deben ser tipos **inmutables** (`str`, `int`, `float`, `tuple`), mientras que los valores pueden ser cualquier objeto (ej. `"Lenguajes": {"Python", "Swift", "Kotlin"}` o `1: 1.77`).
+* **Acceso, modificación y creación de claves:**
+  * **Lectura:** `my_dict["Nombre"]` o `my_dict[1]`. (Si la clave no existe, lanza un `KeyError`).
+  * **Actualización:** Si la clave ya existe, reasignarla actualiza su valor (`my_dict["Nombre"] = "Alonso"`).
+  * **Inserción:** Si la clave no existe, asignarle un valor la crea automáticamente (`my_dict["Calle"] = "Calle falsa 123"`).
+* **Eliminación:**
+  * `del my_dict["Calle"]` elimina el par clave-valor específico del diccionario.
+* **Comprobación con `in`:**
+  * El operador `in` busca **únicamente entre las claves**, no entre los valores:
+    * `"Nombre" in my_dict` devuelve `True` (es una clave).
+    * `"Marín" in my_dict` devuelve `False` (es un valor; para buscar en valores se usa `"Marín" in my_dict.values()`).
+* **Creación desde plantillas (`fromkeys`):**
+  * `dict.fromkeys(("Nombre", 1))` genera un nuevo diccionario tomando un iterable como claves y asignándoles `None` (o un valor por defecto opcional) a todas.
+
+### Métodos principales de Diccionarios
+
+| Método | Descripción | Ejemplo |
+| :--- | :--- | :--- |
+| `.keys()` | Devuelve un objeto vista con todas las **claves** del diccionario. | `my_dict.keys()` |
+| `.values()` | Devuelve un objeto vista con todos los **valores** del diccionario. | `my_dict.values()` |
+| `.items()` | Devuelve una lista de tuplas `(clave, valor)` con cada par del diccionario. | `my_dict.items()` |
+| `.get(clave, default)` | Obtiene el valor de una clave de forma segura. Si no existe, devuelve `None` (o `default`) sin lanzar error. | `my_dict.get("Telefono", "N/A")` |
+| `.update(otro_dict)` | Actualiza el diccionario con los pares clave-valor de otro diccionario (sobrescribe claves repetidas). | `my_dict.update({"Pais": "CR"})` |
+| `.pop(clave)` | Elimina la clave especificada y devuelve su valor asociado. | `edad = my_dict.pop("Edad")` |
+| `.popitem()` | Elimina y devuelve el último par `(clave, valor)` insertado como una tupla. | `ultimo = my_dict.popitem()` |
+| `.setdefault(k, val)` | Devuelve el valor de `k` si existe; si no existe, inserta `k` con el valor `val` y lo devuelve. | `my_dict.setdefault("Activo", True)` |
+| `.fromkeys(seq, val)` | Crea un nuevo diccionario usando los elementos de `seq` como claves y `val` como valor inicial. | `dict.fromkeys(("Nombre", 1))` |
+| `.copy()` | Devuelve una copia superficial (*shallow copy*) del diccionario. | `copia = my_dict.copy()` |
+| `.clear()` | Elimina todos los elementos dejando el diccionario vacío `{}`. | `my_dict.clear()` |
 
 ---
 
