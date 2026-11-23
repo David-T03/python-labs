@@ -17,7 +17,8 @@ Un repositorio práctico donde se documenta y aprende lo básico de Python paso 
 9. [`08_conditionals.py` - Condicionales (Conditionals)](#08_conditionalspy---condicionales-conditionals)
 10. [`09_loops.py` - Bucles o Ciclos (Loops)](#09_loopspy---bucles-o-ciclos-loops)
 11. [`10_functions.py` - Funciones (Functions)](#10_functionspy---funciones-functions)
-12. [📚 Material Adicional y Créditos](#-material-adicional-y-créditos)
+12. [`11_classes.py` - Clases y Programación Orientada a Objetos (POO)](#11_classespy---clases-y-programación-orientada-a-objetos-poo)
+13. [📚 Material Adicional y Créditos](#-material-adicional-y-créditos)
 
 ---
 
@@ -476,6 +477,64 @@ Una **función** es un bloque de código reutilizable y organizado que realiza u
 | **`*args` (Argumentos arbitrarios)** | Permite recibir una cantidad variable de argumentos posicionales como una **tupla**. | `def listar(*elementos):` |
 | **`**kwargs` (Keyword args arbitrarios)** | Permite recibir una cantidad variable de argumentos nombrados como un **diccionario**. | `def perfil(**datos):` |
 | **Funciones `lambda`** | Funciones anónimas de una sola expresión, útiles para operaciones cortas. | `doble = lambda x: x * 2` |
+
+---
+
+---
+
+## `11_classes.py` - Clases y Programación Orientada a Objetos (POO)
+
+Una **clase** (`class`) es una plantilla o plano que define las características (**atributos**) y comportamientos (**métodos**) que tendrán los objetos creados a partir de ella (**instancias**). Por convención **PEP 8**, los nombres de las clases se escriben en formato *PascalCase* / *CamelCase* (ej. `Person`, `Estudiante`).
+
+### Conceptos Fundamentales de POO en Python
+
+* **Constructor (`__init__`) y `self`:**
+  * `__init__` es el método especial que se ejecuta automáticamente al instanciar un objeto (ej. `my_person = Person("David", 25)`).
+  * `self` hace referencia a la propia instancia del objeto que se está creando o manipulando, y debe ir siempre como primer parámetro de los métodos de instancia.
+* **Atributos y Encapsulamiento:**
+  * **Atributos públicos:** Se acceden y modifican directamente desde fuera de la clase (ej. `self.full_name`).
+  * **Atributos privados (`__`):** Al anteponer doble guion bajo (ej. `self.__name`), Python aplica *name mangling* para restringir el acceso directo desde el exterior, protegiendo el dato y obligando a leerlo o modificarlo mediante métodos controlados (*getters* y *setters*, como `get_name()`).
+* **Métodos:** Son funciones definidas dentro de una clase que describen las acciones que el objeto puede realizar (ej. `walk()`, `study()`).
+* **Herencia y `super()`:**
+  * Permite crear una clase hija que reutiliza y extiende los atributos y métodos de una clase padre: `class Estudiante(Person2):`.
+  * La función `super().__init__(...)` invoca al constructor de la clase padre para inicializar los atributos heredados antes de agregar los propios de la subclase (como `self.student_id`).
+
+### Resumen de Elementos en Clases
+
+| Elemento | Descripción | Ejemplo en tu código |
+| :--- | :--- | :--- |
+| `class NombreClase:` | Define una nueva clase u objeto modelo. | `class Person2:` |
+| `def __init__(self, ...):` | Método constructor que inicializa el estado del objeto. | `def __init__(self, name, surname):` |
+| `self.atributo` | Define una propiedad pública asociada a cada instancia. | `self.full_name = f"{name} {surname}"` |
+| `self.__atributo` | Define un atributo privado encapsulado dentro de la clase. | `self.__name = name` |
+| `class Hija(Padre):` | Establece una relación de herencia entre clases. | `class Estudiante(Person2):` |
+| `super()` | Permite acceder a métodos o al constructor de la clase padre. | `super().__init__(name, surname)` |
+
+### Conceptos Avanzados de POO en Python
+
+Para llevar el manejo de clases a un nivel más profesional y *Pythónico*, conviene tener en cuenta los siguientes elementos:
+
+* **Atributos de Clase vs. Atributos de Instancia:**
+  * **Atributos de instancia (`self.name`):** Pertenecen únicamente a cada objeto creado; modificarlo en uno no afecta a los demás.
+  * **Atributos de clase:** Se definen directamente dentro de la clase (fuera de `__init__`) y **son compartidos por todas las instancias** (ej. `especie = "Humano"`).
+* **Métodos Mágicos / Dunder Methods (`__str__`, `__repr__`):**
+  * Son métodos especiales rodeados de doble guion bajo que personalizan el comportamiento nativo de los objetos. Por ejemplo, `__str__` define qué texto se muestra al hacer `print(objeto)` en lugar de imprimir su dirección en memoria:
+    ```python
+    def __str__(self):
+        return f"{self.full_name} (ID: {self.student_id})"
+    ```
+* **Decorador `@property` (Getters y Setters *Pythónicos*):**
+  * Permite acceder y validar atributos privados como si fueran atributos públicos normales, sin necesidad de llamar a métodos explícitos como `get_name()`:
+    ```python
+    @property
+    def name(self):
+        return self.__name
+    ```
+* **Polimorfismo y Sobrescritura (*Method Overriding*):**
+  * Una subclase puede redefinir un método heredado de su clase padre (usando el mismo nombre) para darle un comportamiento especializado.
+* **Decoradores `@classmethod` y `@staticmethod`:**
+  * **`@classmethod`:** Recibe la clase (`cls`) en lugar de la instancia (`self`) como primer parámetro; se utiliza comúnmente para crear constructores alternativos.
+  * **`@staticmethod`:** No recibe ni `self` ni `cls`; funciona como una utilidad auxiliar agrupada dentro de la clase por relación lógica.
 
 ---
 
