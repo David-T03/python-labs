@@ -14,7 +14,9 @@ Un repositorio práctico donde se documenta y aprende lo básico de Python paso 
 6. [`05_tuplas.py` - Tuplas (Tuples)](#05_tuplapy---tuplas-tuples)
 7. [`06_sets.py` - Conjuntos (Sets)](#06_setspy---conjuntos-sets)
 8. [`07_dicts.py` - Diccionarios (Dictionaries)](#07_dictspy---diccionarios-dictionaries)
-9. [📚 Material Adicional y Créditos](#-material-adicional-y-créditos)
+9. [`08_conditionals.py` - Condicionales (Conditionals)](#08_conditionalspy---condicionales-conditionals)
+10. [`09_loops.py` - Bucles o Ciclos (Loops)](#09_loopspy---bucles-o-ciclos-loops)
+11. [📚 Material Adicional y Créditos](#-material-adicional-y-créditos))
 
 ---
 
@@ -372,6 +374,77 @@ Un **diccionario** (`dict`) es una colección **mutable**, **indexada por claves
 | `.fromkeys(seq, val)` | Crea un nuevo diccionario usando los elementos de `seq` como claves y `val` como valor inicial. | `dict.fromkeys(("Nombre", 1))` |
 | `.copy()` | Devuelve una copia superficial (*shallow copy*) del diccionario. | `copia = my_dict.copy()` |
 | `.clear()` | Elimina todos los elementos dejando el diccionario vacío `{}`. | `my_dict.clear()` |
+
+---
+
+---
+
+## `08_conditionals.py` - Condicionales (Conditionals)
+
+Las **estructuras condicionales** permiten controlar el flujo de ejecución de un programa, tomando decisiones para ejecutar distintos bloques de código según si una o varias condiciones se evalúan como verdaderas (`True`) o falsas (`False`).
+
+### Conceptos y Reglas Clave
+
+* **Indentación obligatoria (Sangría):** A diferencia de otros lenguajes que usan llaves `{}`, Python delimita los bloques de código mediante **indentación** (por convención **4 espacios** según PEP 8) después de los dos puntos `:`. Todo lo que esté al mismo nivel de sangría pertenece al mismo bloque; al volver al nivel base (como `print("Fin del programa")`), el código se ejecuta siempre fuera de la condición.
+* **Evaluación implícita (*Truthy* y *Falsy*):**
+  * Escribir `if my_condition:` es equivalente a `if bool(my_condition) == True:`.
+  * **Valores *Falsy* (se evalúan como `False`):** `False`, `None`, `0`, `0.0`, cadenas vacías `""`, y colecciones vacías (`[]`, `()`, `{}`, `set()`).
+  * **Valores *Truthy* (se evalúan como `True`):** Cualquier número distinto de cero (como `25` en `5 * 5`), cadenas con texto o colecciones con al menos un elemento.
+* **Condiciones compuestas:** Se combinan expresiones relacionales (`==`, `!=`, `>`, `<`, `>=`, `<=`) con operadores lógicos (`and`, `or`, `not`), como en `my_condition > 10 and my_condition < 20`.
+* **Orden de evaluación exclusivo:** En una cadena `if` -> `elif` -> `else`, Python evalúa de arriba hacia abajo y **ejecuta únicamente el primer bloque cuya condición sea `True`**, ignorando el resto.
+
+### Estructura y Palabras Clave
+
+| Palabra Clave | Descripción | Comportamiento |
+| :--- | :--- | :--- |
+| `if` | Evalúa la condición principal. | Ejecuta su bloque solo si la expresión resulta `True`. |
+| `elif` | Abreviatura de *else if*. Permite encadenar condiciones adicionales. | Solo se evalúa si todas las condiciones `if` y `elif` anteriores fueron `False`. Puede haber tantos `elif` como sean necesarios. |
+| `else` | Bloque por defecto o de respaldo. No lleva condición. | Se ejecuta únicamente cuando ninguna de las condiciones anteriores se cumplió. Es opcional. |
+
+### Extras Útiles en Condicionales
+
+* **Operador Ternario (Condicional en una línea):** Útil para asignaciones simples basadas en una condición:
+  ```python
+  mensaje = "Es 25" if my_condition == 25 else "No es 25"
+---
+
+---
+
+## `09_loops.py` - Bucles o Ciclos (Loops)
+
+Los **bucles** (*loops*) permiten ejecutar un mismo bloque de código repetidamente mientras se cumpla una condición o mientras se recorren los elementos de una colección de datos. Python cuenta con dos tipos principales de bucles: **`while`** y **`for`**.
+
+### 1. Bucle `while` (Condicional)
+Repite un bloque de código **mientras** una condición lógica se evalúe como `True`.
+
+* **Actualización obligatoria:** Es fundamental modificar la variable de control dentro del ciclo (ej. `my_condition += 1`), de lo contrario se creará un **bucle infinito**.
+* **Bloque `else` en `while` (Opcional):** A diferencia de otros lenguajes, en Python un bucle `while` puede llevar un bloque `else` que se ejecuta automáticamente **solo cuando la condición pasa a ser `False` de manera natural** (no se ejecuta si el bucle se detuvo con un `break`).
+
+### 2. Bucle `for` (Iterativo)
+Se utiliza para recorrer o **iterar** sobre cualquier objeto iterable de Python: listas (`list`), tuplas (`tuple`), conjuntos (`set`), cadenas de texto (`str`), rangos (`range()`) y diccionarios (`dict`).
+
+* **Iteración en diccionarios:**
+  * `for k in my_dict:` recorre las **claves** por defecto.
+  * `for v in my_dict.values():` recorre los **valores**.
+  * `for k, v in my_dict.items():` recorre **clave y valor** simultáneamente.
+
+### Sentencias de Control de Bucles
+
+Tanto `while` como `for` admiten palabras clave para alterar el flujo normal de las repeticiones:
+
+| Sentencia | Descripción | Comportamiento en tu código |
+| :--- | :--- | :--- |
+| `break` | Detiene y **sale por completo** del bucle de inmediato, sin importar si quedan iteraciones pendientes ni ejecutar el `else`. | Al llegar a `15` en el `while` o a `3` en el `for`, interrumpe el ciclo y continúa con el resto del programa. |
+| `continue` | **Salta la iteración actual** omitiendo el código restante debajo de él, y pasa directamente a la siguiente repetición del bucle. | Cuando `element == 3`, evita imprimir su valor y continúa directamente con el `4` y el `5`. |
+| `pass` | Operación nula; se usa como marcador de posición cuando la sintaxis exige un bloque de código pero aún no se ha implementado lógica. | `for x in lista: pass` |
+
+### Extras Útiles con Bucles `for`
+
+* **Función `range(inicio, fin, paso)`:** Genera secuencias numéricas para repetir una acción un número exacto de veces (ej. `for i in range(5):` itera del `0` al `4`).
+* **Función `enumerate(iterable)`:** Permite obtener tanto el **índice** como el **valor** en cada vuelta:
+  ```python
+  for indice, valor in enumerate(my_list):
+      print(f"Índice {indice}: {valor}")
 
 ---
 
