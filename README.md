@@ -16,7 +16,8 @@ Un repositorio práctico donde se documenta y aprende lo básico de Python paso 
 8. [`07_dicts.py` - Diccionarios (Dictionaries)](#07_dictspy---diccionarios-dictionaries)
 9. [`08_conditionals.py` - Condicionales (Conditionals)](#08_conditionalspy---condicionales-conditionals)
 10. [`09_loops.py` - Bucles o Ciclos (Loops)](#09_loopspy---bucles-o-ciclos-loops)
-11. [📚 Material Adicional y Créditos](#-material-adicional-y-créditos))
+11. [`10_functions.py` - Funciones (Functions)](#10_functionspy---funciones-functions)
+12. [📚 Material Adicional y Créditos](#-material-adicional-y-créditos)
 
 ---
 
@@ -445,6 +446,36 @@ Tanto `while` como `for` admiten palabras clave para alterar el flujo normal de 
   ```python
   for indice, valor in enumerate(my_list):
       print(f"Índice {indice}: {valor}")
+
+---
+
+---
+
+## `10_functions.py` - Funciones (Functions)
+
+Una **función** es un bloque de código reutilizable y organizado que realiza una tarea específica. Se definen utilizando la palabra clave **`def`**, seguida del nombre de la función (en *snake_case*), paréntesis `()` y dos puntos `:`.
+
+### ¿Por qué usar Funciones?
+* **Reutilización de código (Principio DRY - *Don't Repeat Yourself*):** Evita duplicar lógica; defines la tarea una vez y la invocas cuantas veces necesites (`my_function()`).
+* **Modularidad y legibilidad:** Divide problemas grandes en piezas pequeñas, fáciles de leer, probar y mantener.
+* **Polimorfismo dinámico en Python:** Como Python es de tipado dinámico, una misma función como `sum_two_values(a, b)` puede sumar enteros (`5 + 7`), decimales (`4.5 + 4.2`) o concatenar cadenas de texto (`"Hola" + "Pura vida"`), siempre que los tipos sean compatibles entre sí.
+
+### Conceptos y Tipos de Funciones
+
+* **Sin parámetros ni retorno:** Ejecutan una acción directa (como imprimir un mensaje) y devuelven `None` de manera implícita.
+* **Con parámetros (Entrada de datos):** Reciben información externa para procesarla.
+  * **Argumentos posicionales:** Se asignan según el orden en que fueron definidos (`sum_two_values(5, 7)`).
+  * **Argumentos por palabra clave (*Keyword Arguments*):** Se pasan indicando el nombre del parámetro, permitiendo alterar el orden (`print_name(surname="Marín", name="David")`).
+* **Con valor de retorno (`return`):** Procesan datos y devuelven un resultado que puede almacenarse en una variable (`my_result = sum_two_values_with_return(10, 5)`) para seguir utilizándolo en otras partes del programa. Al ejecutarse `return`, la función finaliza inmediatamente.
+
+### Extras Útiles en Funciones
+
+| Característica | Descripción | Ejemplo |
+| :--- | :--- | :--- |
+| **Parámetros por defecto** | Asignan un valor predeterminado si no se envía ese argumento al llamar la función. | `def saludar(nombre, alias="Sin alias"):` |
+| **`*args` (Argumentos arbitrarios)** | Permite recibir una cantidad variable de argumentos posicionales como una **tupla**. | `def listar(*elementos):` |
+| **`**kwargs` (Keyword args arbitrarios)** | Permite recibir una cantidad variable de argumentos nombrados como un **diccionario**. | `def perfil(**datos):` |
+| **Funciones `lambda`** | Funciones anónimas de una sola expresión, útiles para operaciones cortas. | `doble = lambda x: x * 2` |
 
 ---
 
